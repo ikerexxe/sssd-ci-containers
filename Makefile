@@ -37,3 +37,8 @@ setup-dns:
 
 setup-dns-files:
 	/bin/bash -c "src/tools/setup-dns-files.sh"
+
+passkey:
+	export ANSIBLE_HOST_KEY_CHECKING=False && \
+	ansible-playbook -i src/ansible/passkey/inventory.yml \
+	--user root --ask-pass src/ansible/passkey/playbook.yml

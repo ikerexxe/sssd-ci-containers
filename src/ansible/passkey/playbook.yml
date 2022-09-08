@@ -1,0 +1,34 @@
+---
+- name: Update client packages
+  hosts: passkey-client
+  vars_files:
+    - variables.yml
+
+  tasks:
+    - name: Enable testing repo
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: ipedrosa/passkey-auth
+    
+    - name: Update packages
+      ansible.builtin.dnf:
+        name: sssd,sssd-common
+        state: latest
+
+- name: Update IPA packages
+  hosts: passkey-ipa
+  vars_files:
+    - variables.yml
+
+  tasks:
+    - name: Enable testing repo
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: ipedrosa/passkey-auth
+    
+    - name: Update packages
+      ansible.builtin.dnf:
+        name: freeipa-server,freeipa-client
+        state: latest

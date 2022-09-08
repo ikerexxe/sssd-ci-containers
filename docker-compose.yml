@@ -102,6 +102,7 @@ services:
     - apparmor=unconfined
     - label=disable
     - seccomp=unconfined
+    privileged: true
     networks:
       sssd:
         ipv4_address: 172.16.100.40
