@@ -13,7 +13,7 @@
     
     - name: Update packages
       ansible.builtin.dnf:
-        name: sssd,sssd-common
+        name: sssd,sssd-common,fido2-tools,yubikey-manager
         state: latest
 
 - name: Update IPA packages
