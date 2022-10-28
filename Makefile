@@ -1,3 +1,5 @@
+SHELL_OUT = $(shell fido2-token -L|cut -f1 -d:)
+
 # make build BASE_IMAGE=fedora:latest TAG=latest
 build:
 	/bin/bash -c "src/build.sh"
@@ -7,7 +9,7 @@ push:
 	/bin/bash -c "src/push.sh"
 
 up:
-	docker-compose up --no-recreate --detach ${LIMIT}
+	export HIDRAW=$(SHELL_OUT) && docker-compose up --detach ${LIMIT}
 
 up-passkey:
 	export HIDRAW=$(shell fido2-token -L|cut -f1 -d:) \

@@ -98,11 +98,13 @@ services:
     - AUDIT_WRITE
     - AUDIT_CONTROL
     - SYS_CHROOT
+    - SYS_RAWIO
+    devices:
+    - "$HIDRAW:$HIDRAW"
     security_opt:
     - apparmor=unconfined
     - label=disable
     - seccomp=unconfined
-    privileged: true
     networks:
       sssd:
         ipv4_address: 172.16.100.40
