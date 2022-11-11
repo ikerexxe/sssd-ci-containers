@@ -32,6 +32,9 @@ services:
     - AUDIT_CONTROL
     - SYS_CHROOT
     - NET_ADMIN
+    - SYS_RAWIO
+    devices:
+    - "$HIDRAW:$HIDRAW"
     security_opt:
     - apparmor=unconfined
     - label=disable

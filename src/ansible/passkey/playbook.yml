@@ -30,5 +30,5 @@
     
     - name: Update packages
       ansible.builtin.dnf:
-        name: freeipa-server,freeipa-client
+        name: freeipa-server,freeipa-client,sssd,sssd-common
         state: latest
