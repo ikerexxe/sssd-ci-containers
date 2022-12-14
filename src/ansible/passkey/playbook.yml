@@ -13,8 +13,18 @@
     
     - name: Update packages
       ansible.builtin.dnf:
-        name: sssd,sssd-common,sssd-passkey,fido2-tools,yubikey-manager,umockdev
+        name: sssd,sssd-common,sssd-passkey,fido2-tools,yubikey-manager,umockdev,gcc,openssl,openssl-devel
         state: latest
+
+    - name: Clone Scott's notes
+      ansible.builtin.git:
+        repo: https://gitlab.cee.redhat.com/spoore/sc-notes/
+        dest: /root/data
+      environment:
+        - GIT_SSL_NO_VERIFY: "true"
+
+    - name: Build mocks
+      shell: "cd /root/data/fido2 && gcc -fPIC -shared -o random.so random.c -lcrypto"
 
 - name: Update IPA packages
   hosts: passkey-ipa
@@ -30,5 +40,15 @@
     
     - name: Update packages
       ansible.builtin.dnf:
-        name: freeipa-server,freeipa-client,sssd,sssd-common,sssd-passkey,umockdev
+        name: freeipa-server,freeipa-client,sssd,sssd-common,sssd-passkey,umockdev,gcc,openssl,openssl-devel
         state: latest
+
+    - name: Clone Scott's notes
+      ansible.builtin.git:
+        repo: https://gitlab.cee.redhat.com/spoore/sc-notes/
+        dest: /root/data
+      environment:
+        - GIT_SSL_NO_VERIFY: "true"
+
+    - name: Build mocks
+      shell: "cd /root/data/fido2 && gcc -fPIC -shared -o random.so random.c -lcrypto"
