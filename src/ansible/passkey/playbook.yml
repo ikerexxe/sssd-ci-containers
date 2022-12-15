@@ -18,13 +18,13 @@
 
     - name: Clone Scott's notes
       ansible.builtin.git:
-        repo: https://gitlab.cee.redhat.com/spoore/sc-notes/
-        dest: /root/data
+        repo: https://gitlab.cee.redhat.com/idm-qe/sssd-passkey-tests
+        dest: /root/sssd-passkey-tests
       environment:
         - GIT_SSL_NO_VERIFY: "true"
 
     - name: Build mocks
-      shell: "cd /root/data/fido2 && gcc -fPIC -shared -o random.so random.c -lcrypto"
+      shell: "cd /root/sssd-passkey-tests && gcc -fPIC -shared -o random.so random.c -lcrypto"
 
 - name: Update IPA packages
   hosts: passkey-ipa
@@ -45,10 +45,10 @@
 
     - name: Clone Scott's notes
       ansible.builtin.git:
-        repo: https://gitlab.cee.redhat.com/spoore/sc-notes/
-        dest: /root/data
+        repo: https://gitlab.cee.redhat.com/idm-qe/sssd-passkey-tests
+        dest: /root/sssd-passkey-tests
       environment:
         - GIT_SSL_NO_VERIFY: "true"
 
     - name: Build mocks
-      shell: "cd /root/data/fido2 && gcc -fPIC -shared -o random.so random.c -lcrypto"
+      shell: "cd /root/sssd-passkey-tests && gcc -fPIC -shared -o random.so random.c -lcrypto"
