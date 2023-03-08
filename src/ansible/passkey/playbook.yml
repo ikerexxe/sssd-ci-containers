@@ -13,7 +13,7 @@
     
     - name: Update packages
       ansible.builtin.dnf:
-        name: sssd,sssd-common,sssd-passkey,fido2-tools,yubikey-manager,umockdev,gcc,openssl,openssl-devel
+        name: sssd,sssd-common,sssd-passkey,fido2-tools,yubikey-manager,umockdev,gcc,openssl,openssl-devel,freeipa-client
         state: latest
 
     - name: Clone Scott's notes
