@@ -5,16 +5,32 @@
     - variables.yml
 
   tasks:
-    - name: Enable testing repo
+    - name: Enable testing repo Fedora
       community.general.copr:
         host: copr.fedorainfracloud.org
         state: enabled
         name: ipedrosa/passkey-auth
+      when: ansible_facts['distribution'] == "Fedora"
+
+    - name: Enable testing repo CentOS
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: ipedrosa/passkey-auth
+        chroot: centos-stream-9-x86_64
+      when: ansible_facts['distribution'] == "CentOS"
     
-    - name: Update packages
+    - name: Update packages Fedora
       ansible.builtin.dnf:
         name: sssd,sssd-common,sssd-passkey,fido2-tools,yubikey-manager,umockdev,gcc,openssl,openssl-devel,freeipa-client
         state: latest
+      when: ansible_facts['distribution'] == "Fedora"
+
+    - name: Update packages CentOS
+      ansible.builtin.dnf:
+        name: sssd,sssd-common,sssd-passkey,fido2-tools,umockdev,gcc,openssl,openssl-devel,freeipa-client
+        state: latest
+      when: ansible_facts['distribution'] == "CentOS"
 
     - name: Clone Scott's notes
       ansible.builtin.git:
@@ -41,11 +57,20 @@
     - variables.yml
 
   tasks:
-    - name: Enable testing repo
+    - name: Enable testing repo Fedora
       community.general.copr:
         host: copr.fedorainfracloud.org
         state: enabled
         name: ipedrosa/passkey-auth
+      when: ansible_facts['distribution'] == "Fedora"
+
+    - name: Enable testing repo CentOS
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: ipedrosa/passkey-auth
+        chroot: centos-stream-9-x86_64
+      when: ansible_facts['distribution'] == "CentOS"
     
     - name: Update packages
       ansible.builtin.dnf:
