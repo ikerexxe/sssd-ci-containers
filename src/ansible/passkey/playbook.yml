@@ -39,18 +39,6 @@
       environment:
         - GIT_SSL_NO_VERIFY: "true"
 
-    - name: Build mocks
-      shell: "cd /root/sssd-passkey-tests && gcc -fPIC -shared -o random.so random.c -lcrypto"
-
-    - name: Move random.so
-      ansible.builtin.copy:
-        remote_src: true
-        src: /root/sssd-passkey-tests/random.so
-        dest: /opt/random.so
-        owner: root
-        group: root
-        mode: '0755'
-
 - name: Update IPA packages
   hosts: passkey-ipa
   vars_files:
@@ -83,15 +71,3 @@
         dest: /root/sssd-passkey-tests
       environment:
         - GIT_SSL_NO_VERIFY: "true"
-
-    - name: Build mocks
-      shell: "cd /root/sssd-passkey-tests && gcc -fPIC -shared -o random.so random.c -lcrypto"
-
-    - name: Move random.so
-      ansible.builtin.copy:
-        remote_src: true
-        src: /root/sssd-passkey-tests/random.so
-        dest: /opt/random.so
-        owner: root
-        group: root
-        mode: '0755'
